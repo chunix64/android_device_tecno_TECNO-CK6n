@@ -9,14 +9,14 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit some common Omni stuff.
+# Inherit some common TWRP stuff.
 $(call inherit-product, vendor/twrp/config/common.mk)
 
 # Inherit from TECNO-CK6n device
 $(call inherit-product, device/tecno/TECNO-CK6n/device.mk)
 
 PRODUCT_DEVICE := TECNO-CK6n
-PRODUCT_NAME := omni_TECNO-CK6n
+PRODUCT_NAME := twrp_TECNO-CK6n
 PRODUCT_BRAND := TECNO
 PRODUCT_MODEL := TECNO CK6n
 PRODUCT_MANUFACTURER := tecno
