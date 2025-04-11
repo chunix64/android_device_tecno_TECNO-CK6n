@@ -1,10 +1,10 @@
-/system                   erofs     system                               flags=display=system;logical;slotselect
-/system                   ext4      system                               flags=display=system;logical;slotselect
+/system                   erofs     system                               flags=display=system;logical;slotselect;backup=1;flashimg
+/system                   ext4      system                               flags=display=system;logical;slotselect;backup=1;flashimg
 /system_ext               erofs     system_ext                           flags=display=system_ext;logical;slotselect
-/vendor                   erofs     vendor                               flags=display=vendor;logical;slotselect
-/product                  erofs     product                              flags=display=product;logical;slotselect
+/vendor                   erofs     vendor                               flags=display=vendor;logical;slotselect;backup=1;flashimg
+/product                  erofs     product                              flags=display=product;logical;slotselect;backup=1;flashimg
 /metadata                 ext4      /dev/block/by-name/md_udc            flags=display=metadata
-/data                     f2fs      /dev/block/by-name/userdata          flags=display=data
+/data                     f2fs      /dev/block/by-name/userdata          flags=display=data;backup=1;flashimg
 /tranfs                   ext4      /dev/block/by-name/tranfs            flags=display=tranfs
 /mnt/vendor/protect_f     ext4      /dev/block/by-name/protect1          flags=display=protect_f
 /mnt/vendor/protect_s     ext4      /dev/block/by-name/protect2          flags=display=protect_s
@@ -21,7 +21,7 @@ auto                      vfat      /devices/platform/mt_usb*            flags=d
 /misc                     emmc      /dev/block/by-name/misc              flags=display=misc
 /para                     emmc      /dev/block/by-name/para              flags=display=para
 /vendor_boot              emmc      /dev/block/by-name/vendor_boot       flags=display=vendor_boot
-/boot                     emmc      /dev/block/by-name/boot              flags=display=boot;slotselect
+/boot                     emmc      /dev/block/by-name/boot              flags=display=boot;slotselect;backup=1;flashimg
 /vbmeta_vendor            emmc      /dev/block/by-name/vbmeta_vendor     flags=display=vbmeta_vendor;slotselect
 /vbmeta_system            emmc      /dev/block/by-name/vbmeta_system     flags=display=vbmeta_system;slotselect
 /logo                     emmc      /dev/block/by-name/logo              flags=display=logo
@@ -43,3 +43,7 @@ auto                      vfat      /devices/platform/mt_usb*            flags=d
 /otp                      emmc      /dev/block/by-name/otp               flags=display=otp
 /vbmeta                   emmc      /dev/block/by-name/vbmeta            flags=display=vbmeta
 /tkv                      emmc      /dev/block/by-name/tkv               flags=display=tkv
+
+# Removable storage
+/external_sd    vfat        /dev/block/mmcblk0p1    /dev/block/mmcblk0        flags=storage;wipeingui;removable
+/usb-otg    auto        /dev/block/sda1    /dev/block/sda                flags=display="USB-OTG";storage;wipeingui;removable
