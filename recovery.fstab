@@ -1,6 +1,6 @@
 /system                   erofs     system                               flags=display=system;logical;slotselect;backup=1;flashimg
 /system                   ext4      system                               flags=display=system;logical;slotselect;backup=1;flashimg
-/system_ext               erofs     system_ext                           flags=display=system_ext;logical;slotselect
+/system_ext               erofs     system_ext                           flags=display=system_ext;logical;slotselect;backup=1;flashimg
 /vendor                   erofs     vendor                               flags=display=vendor;logical;slotselect;backup=1;flashimg
 /product                  erofs     product                              flags=display=product;logical;slotselect;backup=1;flashimg
 /metadata                 ext4      /dev/block/by-name/md_udc            flags=display=metadata
@@ -45,5 +45,5 @@ auto                      vfat      /devices/platform/mt_usb*            flags=d
 /tkv                      emmc      /dev/block/by-name/tkv               flags=display=tkv
 
 # Removable storage
-/external_sd    vfat        /dev/block/mmcblk0p1    /dev/block/mmcblk0        flags=storage;wipeingui;removable
+/external_sd    vfat        /dev/block/mmcblk1p1    /dev/block/mmcblk1        flags=storage;wipeingui;removable
 /usb-otg    auto        /dev/block/sda1    /dev/block/sda                flags=display="USB-OTG";storage;wipeingui;removable
