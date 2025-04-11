@@ -9,7 +9,7 @@
 #
 ```
 
-Device Name: Tecno Camon
+Device Name: Tecno Camon 20
 
 Model: CK6n
 
