@@ -13,15 +13,15 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, vendor/twrp/config/common.mk)
 
 # Inherit from TECNO-CK6n device
-$(call inherit-product, device/tecno/TECNO-CK6n/device.mk)
+$(call inherit-product, device/tecno/CK6n/device.mk)
 
-PRODUCT_DEVICE := TECNO-CK6n
-PRODUCT_NAME := twrp_TECNO-CK6n
+PRODUCT_NAME := twrp_CK6n
+PRODUCT_DEVICE := CK6n
 PRODUCT_BRAND := TECNO
 PRODUCT_MODEL := TECNO CK6n
-PRODUCT_MANUFACTURER := tecno
+PRODUCT_MANUFACTURER := TECNO
 
-PRODUCT_GMS_CLIENTID_BASE := android-tecno
+PRODUCT_GMS_CLIENTID_BASE := android-transsion
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="vnd_ck6nu_h6929-user 12 SP1A.210812.016 817370 release-keys"

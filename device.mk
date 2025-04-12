@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-LOCAL_PATH := device/tecno/TECNO-CK6n
+LOCAL_PATH := device/tecno/CK6n
 # A/B
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
@@ -21,11 +21,16 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     bootctrl.mt6768
 
-PRODUCT_STATIC_BOOT_CONTROL_HAL := \
-    bootctrl.mt6768 \
-    libgptutils \
-    libz \
-    libcutils
+#PRODUCT_STATIC_BOOT_CONTROL_HAL := \
+#    bootctrl.mt6768 \
+#    libgptutils \
+#    libz \
+#    libcutils
+
+PRODUCT_PACKAGES += \
+    android.hardware.boot@1.2-impl \
+    android.hardware.boot@1.2-service \
+    bootctrl.mt6768.recovery
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
@@ -41,6 +46,3 @@ PRODUCT_PACKAGES += \
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 PRODUCT_SHIPPING_API_LEVEL := 34
-
-PRODUCT_DEVICE := TECNO-CK6n
-PRODUCT_NAME := twrp_TECNO-CK6n
