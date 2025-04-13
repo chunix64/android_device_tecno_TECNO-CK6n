@@ -55,7 +55,7 @@ This repository was coincidentally created on the **same day** this device tree 
 - Use `PRODUCT_NAME := twrp_CK6n` instead.  
 - Reason: AOSP 14 `lunch` uses the format `<product>-<release>-<variant>`.  
   Extra dashes (like in `TECNO-CK6n`) cause `split("-")` errors.  
-- ✅ Example: `lunch twrp_CK6n-ap2a-eng` (ap2a is the default release name used by OrangeFox, following the official [OrangeFox build Wiki] (https://wiki.orangefox.tech/en/dev/building))
+- ✅ Example: `lunch twrp_CK6n-ap2a-eng` (ap2a is the default release name used by OrangeFox, following the official [OrangeFox build Wiki](https://wiki.orangefox.tech/en/dev/building))
 
 
 ---
