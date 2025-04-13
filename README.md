@@ -9,12 +9,10 @@
 #
 ```
 
-Device Name: Tecno Camon 20
-
-Model: CK6n
-
-Build number: ck6n-h6929cd-u-op-250218v1310
-
-CPU: Mediatek Helio G85
-
-CPU platform: MT6768 / MT6769Z (68 and 69 is same)
+Basic | Specification Sheet
+:-----|:-----------------------
+Device Name | Tecno Camon 20
+Model | CK6n
+Build number | ck6n-h6929cd-u-op-250218v1310
+CPU | Mediatek Helio G85
+CPU platform | MT6768 / MT6769Z (68 and 69 is same)
