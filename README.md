@@ -33,6 +33,16 @@ This device tree was created to build **custom recovery images**, primarily for:
 
 ---
 
+## 🔗 Firmware Dump Reference
+
+A firmware dump for **TECNO CK6n** is also available at the following repository:
+
+👉 [rama-firmware-dumps/TECNO-CK6n on GitGud](https://gitgud.io/rama-firmware-dumps/tecno/TECNO-CK6n)
+
+This repository was coincidentally created on the **same day** this device tree was first built. If you're looking for firmware binaries (boot, vbmeta, dtbo, etc.) to assist in porting recovery or debugging device tree issues, this can serve as a valuable resource.
+
+> Feel free to open an issue or pull request if you have questions or contributions regarding integration with this firmware dump.
+
 ## 📎 Additional Notes
 
 - MT6768 and MT6769Z are largely identical in SoC architecture.
