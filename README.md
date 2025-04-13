@@ -2,12 +2,12 @@
 ## 📱 Device Specifications
 
 | Property        | Value                                     |
-|----------------|-------------------------------------------|
+|-----------------|-------------------------------------------|
 | **Device Name** | Tecno Camon 20                            |
 | **Model**       | CK6n                                      |
 | **Build Number**| ck6n-h6929cd-u-op-250218v1310             |
 | **Platform**    | Mediatek Helio G85 (MT6768 / MT6769Z)     |
-| **Android**     | 14.0                                      |
+| **Android**     | 14                                        |
 | **Storage**     | 256 GB                                    |
 | **RAM**         | 8 GB                                      |
 | **Battery**     | Li-Po 5000 mAh, non-removable             |
