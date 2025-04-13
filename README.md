@@ -48,6 +48,10 @@ This repository was coincidentally created on the **same day** this device tree 
 - MT6768 and MT6769Z are largely identical in SoC architecture.
 - Ensure you have **bypassed AVB and verified vbmeta** when flashing recovery.
 - Kernel source is not yet fully public; prebuilt DTBO and boot images might be needed.
+- Use `PRODUCT_NAME := twrp_CK6n` instead of `twrp_TECNO-CK6n`.  
+  AOSP 14 lunch uses the format `<product>-<release>-<variant>`.  
+  Extra dashes (like in `TECNO-CK6n`) will break `lunch` due to incorrect `split("-")`.  
+  Example: `lunch twrp_CK6n-ap2a-eng`
 
 ---
 
