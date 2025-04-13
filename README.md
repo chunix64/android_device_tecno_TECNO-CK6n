@@ -5,7 +5,7 @@
 |-----------------|-------------------------------------------|
 | **Device Name** | Tecno Camon 20                            |
 | **Model**       | CK6n                                      |
-| **Build Number**| ck6n-h6929cd-u-op-250218v1310             |
+| **Build Number**| CK6n-H6929CD-U-OP-250218V1310             |
 | **Platform**    | Mediatek Helio G85 (MT6768 / MT6769Z)     |
 | **Android**     | 14                                        |
 | **Storage**     | 256 GB                                    |
