@@ -1,18 +1,19 @@
 # Android device tree for TECNO TECNO CK6n (TECNO-CK6n)
 ## 📱 Device Specifications
 
-| Property        | Value                                     |
-|-----------------|-------------------------------------------|
-| **Device Name** | Tecno Camon 20                            |
-| **Model**       | CK6n                                      |
-| **Build Number**| CK6n-H6929CD-U-OP-250218V1310             |
-| **Platform**    | Mediatek Helio G85 (MT6768 / MT6769Z)     |
-| **Android**     | 14                                        |
-| **Storage**     | 256 GB                                    |
-| **RAM**         | 8 GB                                      |
-| **Battery**     | Li-Po 5000 mAh, non-removable             |
-| **Display**     | 6.67", 1080 x 2400 pixels                 |
-
+| Property          | Value                                     |
+|-------------------|-------------------------------------------|
+| **Device Name**   | Tecno Camon 20                            |
+| **Model**         | CK6n                                      |
+| **Build Number**  | CK6n-H6929CD-U-OP-250218V1310             |
+| **Platform**      | Mediatek Helio G85 (MT6768 / MT6769Z)     |
+| **Android**       | 14                                        |
+| **Storage**       | 256 GB                                    |
+| **RAM**           | 8 GB                                      |
+| **Battery**       | Li-Po 5000 mAh, non-removable             |
+| **Display**       | 6.67", 1080 x 2400 pixels                 |
+| **A/B Device**    | True                                      |
+| **Treble Device** | True                                      |
 ## ⚙️ Purpose of This Device Tree
 
 This device tree was created to build **custom recovery images**, primarily for:
