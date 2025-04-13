@@ -12,7 +12,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit some common TWRP stuff.
 $(call inherit-product, vendor/twrp/config/common.mk)
 
-# Inherit from TECNO-CK6n device
+# Inherit from CK6n device
 $(call inherit-product, device/tecno/CK6n/device.mk)
 
 PRODUCT_NAME := twrp_CK6n
