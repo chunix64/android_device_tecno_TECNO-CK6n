@@ -53,7 +53,7 @@ This repository was coincidentally created on the **same day** this device tree 
 
 - Do **not** use `PRODUCT_NAME := twrp_TECNO-CK6n`.  
 - Use `PRODUCT_NAME := twrp_CK6n` instead.  
-- Reason: AOSP 14 lunch uses the format `<product>-<release>-<variant>`.  
+- Reason: AOSP 14 `lunch` uses the format `<product>-<release>-<variant>`.  
   Extra dashes (like in `TECNO-CK6n`) cause `split("-")` errors.  
 - ✅ Example: `lunch twrp_CK6n-ap2a-eng`
 
