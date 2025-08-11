@@ -23,11 +23,22 @@ TARGET_BOARD_PLATFORM_GPU := mali-g52mc2
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := TECNO-CK6n
-TARGET_NO_BOOTLOADER := false
+TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := no
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := TECNO-CK6n
+
+# A/B
+AB_OTA_UPDATER := true
+AB_OTA_PARTITIONS += \
+    boot \
+    product \
+    vendor \
+    vbmeta_vendor \
+    vbmeta_system \
+    system_ext \
+    system
 
 # kernel
 BOARD_VENDOR_CMDLINE := bootopt=64S3,32N2,64N2
@@ -52,14 +63,12 @@ TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 
-BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
 BOARD_MKBOOTIMG_ARGS += --board "TECNO-CK6n"
 BOARD_MKBOOTIMG_ARGS += --vendor_cmdline $(BOARD_VENDOR_CMDLINE)
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_PAGESIZE)
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
-BOARD_MKBOOTIMG_ARGS += --kernel_offset $(BOARD_KERNEL_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
@@ -80,7 +89,12 @@ BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 TARGET_USERIMAGES_USE_F2FS := true
-#BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x3727ef8000
+#BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x3727ef8000 # Depend on device is 128gb or 256gb, unset for safety
+
+# Workaround for error copying vendor, product files to recovery ramdisk
+TARGET_COPY_OUT_VENDOR := vendor
+TARGET_COPY_OUT_PRODUCT := product
+TARGET_COPY_OUT_SYSTEM_EXT := system_ext
 
 # Dynamic Partition
 BOARD_SUPER_PARTITION_SIZE := 0x2c5db0000
@@ -160,6 +174,9 @@ TW_DEFAULT_LANGUAGE := en
 TW_INCLUDE_NTFS_3G := true
 TARGET_USES_MKE2FS := true
 TARGET_DISABLE_TRIPLE_BUFFERING := false
+TW_INCLUDE_FASTBOOTD := true
+TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_LIBRESETPROP := true
 
 # Storage
 TW_INTERNAL_STORAGE_PATH := "/data/media/0"
@@ -182,8 +199,3 @@ TW_DEVICE_VERSION := Second Republic
 #TW_LOAD_VENDOR_MODULES := "regulator_vibrator.ko"
 TW_SUPPORT_INPUT_AIDL_HAPTICS := true
 TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/default"
-
-# Workaround for error copying vendor, product files to recovery ramdisk
-TARGET_COPY_OUT_VENDOR := vendor
-TARGET_COPY_OUT_PRODUCT := product
-TARGET_COPY_OUT_SYSTEM_EXT := system_ext
