@@ -1,3 +1,157 @@
+import /trustonic.rc
+import /tee.rc
+
+on init
+  symlink /dev/block/platform/bootdevice /dev/block/bootdevice
+  export LD_LIBRARY_PATH=/system/lib64:/system/lib64/hw:/system_ext/lib64:/system_ext/lib64/hw:/vendor/lib64:/vendor/lib64/hw:/system/lib:/system/lib/hw:/system_ext/lib:/system_ext/lib/hw:/vendor/lib:/vendor/lib/hw:/lib:/lib/hw
+
+on fs
+  mkdir /mnt/vendor 0700 root root
+  mkdir /mnt/vendor/persist 0700 root root
+  mount ext4 /dev/block/by-name/persist /mnt/vendor/persist
+
+on post-fs
+    write /proc/bootprof "INIT:post-fs"
+
+    # Support legacy paths
+    symlink /sdcard /storage/sdcard0
+
+    #change permissions for mediaserver
+    chown root media /proc/clkmgr/mipi_test
+
+    #change permission for engineer mode
+    chown radio system /proc/clkmgr/pll_test
+    chown radio system /proc/clkmgr/pll_fsel
+    chmod 0664 /proc/clkmgr/pll_test
+    chmod 0664 /proc/clkmgr/pll_fsel
+    #change permission for engineer mode
+    chown radio system /proc/freqhopping/dramc
+    chown radio system /proc/freqhopping/dumpregs
+    chown radio system /proc/freqhopping/freqhopping_debug
+    chown radio system /proc/freqhopping/status
+    chown radio system /proc/freqhopping/userdef
+
+# change owner
+    chown system system /proc/bootprof
+    chmod 0664 /proc/bootprof
+    chown root system /proc/mtprof/cputime
+    chown root system /proc/mtprof/reboot_pid
+
+    chown system system /mnt/vendor/protect_f
+    chmod 0770 /mnt/vendor/protect_f
+
+    chown system system /mnt/vendor/protect_s
+    chmod 0770 /mnt/vendor/protect_s
+
+    # Support A/B feature for EMMC and UFS boot region
+    symlink /dev/block/sda /dev/block/mmcblk0boot0
+    symlink /dev/block/sdb /dev/block/mmcblk0boot1
+    symlink /dev/block/mmcblk0boot0 /dev/block/platform/bootdevice/by-name/preloader_a
+    symlink /dev/block/mmcblk0boot1 /dev/block/platform/bootdevice/by-name/preloader_b
+    symlink /dev/block/mmcblk0boot0 /dev/block/by-name/preloader_a
+    symlink /dev/block/mmcblk0boot1 /dev/block/by-name/preloader_b
+
+    # allow ccci_mdinit access ccci_dump
+    chown root system /proc/ccci_dump
+
+    #BSP:add ffu upgrade KFLJHLEYB-2005 by wang.qin 20210304 start
+    restorecon_recursive /tranfs
+    mkdir /tranfs/ffu 0700 system shell
+    chmod 0777 /tranfs/ffu
+    #BSP:add ffu upgrade KFLJHLEYB-2005 by wang.qin 20210304 end
+
+    #STD:add XLLWCHLYEL-738 kfp by hao.lv5 20220907 start
+    restorecon_recursive /tranfs
+    mkdir /tranfs/tranf2fs 0700 root shell
+    chmod 0771 /tranfs/tranf2fs
+    mkdir /tranfs/tranf2fs/kfp 0700 root shell
+    chmod 0771 /tranfs/tranf2fs/kfp
+    #STD:add XLLWCHLYEL-738 kfp by hao.lv5 20220907 end
+    
+    start mtk.plpath.utils.link
+
+on fs
+    install_keyring
+
+service mtk.plpath.utils.link /system_ext/bin/mtk_plpath_utils
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
+service keystore_auth /system/bin/keystore_auth
+  oneshot
+  user system
+  group root
+  disabled
+  seclabel u:r:recovery:s0
+
+service keystore2 /system/bin/keystore2 /data/misc/keystore
+  user root
+  group root keystore readproc log
+  task_profiles ProcessCapacityHigh
+  disabled
+  seclabel u:r:recovery:s0
+
+service vendor.gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
+    interface android.hardware.gatekeeper@1.0::IGatekeeper default
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service vendor.keymaster-4-1-trustonic /vendor/bin/hw/android.hardware.keymaster@4.1-service.trustonic
+  user root
+  group root system drmrpc
+  disabled
+  oneshot
+  seclabel u:r:recovery:s0
+
+service tee-1-1 /vendor/bin/hw/vendor.trustonic.tee@1.1-service
+  user root
+  group root system
+  disabled
+  seclabel u:r:recovery:s0
+
+on property:vendor.sys.listener.registered=true
+  start mobicore
+  start vendor.gatekeeper-1-0 
+  start vendor.keymaster-4-1-trustonic
+  start tee-1-1
+
+on property:hwservicemanager.ready=true
+  write /proc/bootprof "MOBICORE: create /data/vendor/mcRegistry ++ (FBE encrypted)"
+  start mobicore
+  write /proc/bootprof "MOBICORE: create /data/vendor/mcRegistry -- (FBE encrypted)"
+  start vendor.gatekeeper-1-0 
+  start vendor.keymaster-4-1-trustonic
+  start tee-1-1
+
+on property:ro.crypto.state=unsupported
+  stop mobicore
+  stop vendor.gatekeeper-1-0 
+  stop vendor.keymaster-4-1-trustonic
+  stop tee-1-1
+
+on property:ro.crypto.state=unencrypted
+  stop mobicore
+  stop vendor.gatekeeper-1-0 
+  stop vendor.keymaster-4-1-trustonic
+  stop tee-1-1
+
+on property:twrp.decrypt.done=true
+  stop mobicore
+  stop vendor.gatekeeper-1-0 
+  stop vendor.keymaster-4-1-trustonic
+  stop tee-1-1
+
+on boot
+  start boot-hal-1-2
+  start health-hal-2-1
+
+# Old init
 on init
     setprop sys.usb.configfs 1
     setprop sys.usb.controller "musb-hdrc"
@@ -9,13 +163,3 @@ on fs && property:ro.debuggable=0
     # set charging free due to it wait for USB activation
     start adbd
 
-on post-fs
-    # Support A/B feature for EMMC and UFS boot region
-    symlink /dev/block/sda /dev/block/mmcblk0boot0
-    symlink /dev/block/sdb /dev/block/mmcblk0boot1
-    symlink /dev/block/mmcblk0boot0 /dev/block/platform/bootdevice/by-name/preloader_a
-    symlink /dev/block/mmcblk0boot1 /dev/block/platform/bootdevice/by-name/preloader_b
-    symlink /dev/block/mmcblk0boot0 /dev/block/by-name/preloader_a
-    symlink /dev/block/mmcblk0boot1 /dev/block/by-name/preloader_b
-
-    exec u:r:update_engine:s0 root root -- /system/bin/mtk_plpath_utils
