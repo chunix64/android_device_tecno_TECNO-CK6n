@@ -194,6 +194,7 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.
 # Debug
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
+TWRP_EVENT_LOGGING := true
 
 # Firmware version & Developer Display name
 TW_DEFAULT_DEVICE_NAME := TECNO-CK6n
@@ -203,3 +204,16 @@ TW_DEVICE_VERSION := Second Republic
 #TW_LOAD_VENDOR_MODULES := "regulator_vibrator.ko"
 TW_SUPPORT_INPUT_AIDL_HAPTICS := true
 TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/default"
+
+# Add additional libraries for Trustonic TEE
+TARGET_RECOVERY_DEVICE_MODULES += libMcClient libTeeClient libkmsetkey libtrustonic
+TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libMcClient.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libTeeClient.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libkmsetkey.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/vendor.trustonic.tee@1.0.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/vendor.trustonic.tee@1.1.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/vendor.trustonic.tee.tui@1.0.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libMcGatekeeper.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/gatekeeper.trustonic.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/kmsetkey.trustonic.so
