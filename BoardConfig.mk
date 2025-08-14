@@ -201,9 +201,9 @@ TW_DEFAULT_DEVICE_NAME := TECNO-CK6n
 TW_DEVICE_VERSION := Second Republic
 
 # Modules & Sensors
-#TW_LOAD_VENDOR_MODULES := "regulator_vibrator.ko"
-TW_SUPPORT_INPUT_AIDL_HAPTICS := true
-TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/default"
+# TW_LOAD_VENDOR_MODULES := "regulator_vibrator.ko"
+# TW_SUPPORT_INPUT_AIDL_HAPTICS := true
+# TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/default"
 
 # Add additional libraries for Trustonic TEE
 TARGET_RECOVERY_DEVICE_MODULES += libMcClient libTeeClient libkmsetkey libtrustonic
