@@ -93,10 +93,12 @@ service keystore_auth /system/bin/keystore_auth
   disabled
   seclabel u:r:recovery:s0
 
-service keystore2 /system/bin/keystore2 /data/misc/keystore
+service keystore2 /system/bin/keystore2 /tmp/misc/keystore
+  class early_hal
   user root
-  group root keystore readproc log
+  group root system keystore readproc log
   task_profiles ProcessCapacityHigh
+  writepid /dev/cpuset/foreground/tasks
   disabled
   seclabel u:r:recovery:s0
 
