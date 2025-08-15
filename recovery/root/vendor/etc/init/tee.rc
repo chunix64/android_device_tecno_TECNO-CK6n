@@ -1,5 +1,7 @@
 on init
     #create mountpoint for /mnt/vendor/persist partition
+    mkdir /mnt/ 0771 system system 
+    mkdir /mnt/vendor/ 0771 system system
     mkdir /mnt/vendor/persist 0771 system system
 
 on post-fs

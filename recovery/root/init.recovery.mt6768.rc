@@ -89,7 +89,7 @@ service mtk.plpath.utils.link /system_ext/bin/mtk_plpath_utils
 service keystore_auth /system/bin/keystore_auth
   oneshot
   user system
-  group root
+  group root system
   disabled
   seclabel u:r:recovery:s0
 
