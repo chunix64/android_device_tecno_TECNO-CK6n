@@ -1,5 +1,10 @@
-import /trustonic.rc
-import /tee.rc
+import /vendor/etc/init/tee.rc
+import /vendor/etc/init/trustonic.rc
+import /vendor/etc/init/android.hardware.gatekeeper@1.0-service.rc
+import /vendor/etc/init/vendor.mediatek.hardware.paytrigger@1.0-service.rc
+import /vendor/etc/init/trustonic.mc_kmsetkey_ca.rc
+import /vendor/etc/init/vendor.mediatek.hardware.keymaster_attestation@1.1-service.rc
+import /vendor/etc/init/vendor.trustonic.tee@1.1-service.rc
 
 on init
   symlink /dev/block/platform/bootdevice /dev/block/bootdevice
@@ -94,13 +99,6 @@ service keystore2 /system/bin/keystore2 /data/misc/keystore
   task_profiles ProcessCapacityHigh
   disabled
   seclabel u:r:recovery:s0
-
-service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
-    interface android.hardware.gatekeeper@1.0::IGatekeeper default
-    user root
-    group root
-    disabled
-    seclabel u:r:recovery:s0
 
 service keymaster-4-1-trustonic /vendor/bin/hw/android.hardware.keymaster@4.1-service.trustonic
   interface android.hardware.keymaster@4.0::IKeymasterDevice default
