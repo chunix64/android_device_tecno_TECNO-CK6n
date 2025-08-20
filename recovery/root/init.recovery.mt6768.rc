@@ -5,12 +5,15 @@ import /vendor/etc/init/vendor.mediatek.hardware.paytrigger@1.0-service.rc
 import /vendor/etc/init/trustonic.mc_kmsetkey_ca.rc
 import /vendor/etc/init/vendor.mediatek.hardware.keymaster_attestation@1.1-service.rc
 import /vendor/etc/init/vendor.trustonic.tee@1.1-service.rc
+import /vendor/etc/init/android.hardware.boot@1.2-service.rc
 
 on init
   symlink /dev/block/platform/bootdevice /dev/block/bootdevice
   export LD_LIBRARY_PATH=/system/lib64:/system/lib64/hw:/system_ext/lib64:/system_ext/lib64/hw:/vendor/lib64:/vendor/lib64/hw:/system/lib:/system/lib/hw:/system_ext/lib:/system_ext/lib/hw:/vendor/lib:/vendor/lib/hw:/lib:/lib/hw
 
 on fs
+  write /proc/bootprof "INIT:fs"
+  start boot-hal-1-2
   mkdir /mnt/vendor 0700 root root
   mkdir /mnt/vendor/persist 0700 root root
   mount ext4 /dev/block/by-name/persist /mnt/vendor/persist
